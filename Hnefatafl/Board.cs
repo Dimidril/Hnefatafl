@@ -105,7 +105,10 @@ namespace Hnefatafl
             {
                 if(neighbourFigure == Figure.King) return;
                 var nextNeighbour = new Square(neighbour.x + xOffset, neighbour.y + yOffset);
-                if (nextNeighbour.OnBoard() && GetFigureAt(nextNeighbour).GetColor() == MoveColor)
+                var nextNeighbourFigure = GetFigureAt(nextNeighbour);
+                if (nextNeighbour.OnBoard() && 
+                    (nextNeighbourFigure.GetColor() == MoveColor || nextNeighbour.IsСorner() ||
+                     (nextNeighbour.IsThrone() && nextNeighbourFigure != Figure.King)))
                 {
                     next.SetFigureAt(neighbour, Figure.None);
                 }

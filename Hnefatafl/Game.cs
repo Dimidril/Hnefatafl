@@ -5,8 +5,8 @@ namespace Hnefatafl
     public class Game
     {
         public const int Size = 11;
-        private const string StartFen = "...aaaaa.../" +
-                                       ".....a...../" +
+        private const string StartFen ="...aaaaa.../" +
+                                       ".....a....d/" +
                                        ".........../" +
                                        "a....d....a/" +
                                        "a...ddd...a/" +
