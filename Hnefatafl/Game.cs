@@ -39,9 +39,7 @@ namespace Hnefatafl
         {
             
             FigureMoving figureMoving = new FigureMoving(move);
-            bool isCanMove = this.move.CanMove(figureMoving);
-            Console.WriteLine($"Move - {Board.MoveColor}. {figureMoving.Figure.GetColor()} - CanMove {isCanMove}. ");
-            if (!isCanMove)
+            if (!this.move.CanMove(figureMoving))
                 return this;
             Board nextBoard = Board.Move(figureMoving);
             Game nextGame = new Game(nextBoard);

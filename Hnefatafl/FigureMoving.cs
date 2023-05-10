@@ -30,6 +30,7 @@ namespace Hnefatafl
             Figure = (Figure)text[0][0];
             From = new Square(text[1]);
             To = new Square(text[2]);
+            
         }
     }
 }

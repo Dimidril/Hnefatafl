@@ -8,8 +8,6 @@ namespace Hnefatafl
         public static Square none = new Square(-1, -1);
         public int x { get; private set; }
         public int y { get; private set; }
-
-        
         
         public Square(int x, int y)
         {
@@ -32,8 +30,8 @@ namespace Hnefatafl
         
         public bool OnBoard()
         {
-            return x >= 0 && x <= Game.size &&
-                   y >= 0 && y <= Game.size;
+            return x >= 0 && x < Game.size &&
+                   y >= 0 && y < Game.size;
         }
 
         public bool IsThrone()

@@ -25,6 +25,7 @@ namespace Hnefatafl
         private bool CanMoveFrom()
         {
             return _figureMoving.From.OnBoard() &&
+                   _board.GetFigureAt(_figureMoving.From) != Figure.None &&
                    _figureMoving.Figure.GetColor() == _board.MoveColor;
         }
         
@@ -40,26 +41,18 @@ namespace Hnefatafl
             {
                 case Figure.Attacker:
                 case Figure.Defender:
-                    return CanStandardMove();
+                    return !(_figureMoving.To.IsThrone() || _figureMoving.To.IsСorner()) && CanStandardMove();
                 case Figure.King:
-                    return CanKingMove();
+                    return CanStandardMove();
                 default:
                     return false;
             }
         }
-
-        
-        private bool CanKingMove()
-        {
-            return !(_figureMoving.To.IsThrone() || _figureMoving.To.IsСorner()) && CanStandardMove();
-        }
-        
         private bool CanStandardMove()
         {
             return (_figureMoving.SignX == 0 || _figureMoving.SignY == 0) && CanStraightMove();
         }
 
-        
         private bool CanStraightMove()
         {
             Square at = _figureMoving.From;

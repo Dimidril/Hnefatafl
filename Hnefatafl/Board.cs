@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 namespace Hnefatafl
@@ -44,11 +45,37 @@ namespace Hnefatafl
             Board next = new Board(Fen);
             next.SetFigureAt(figureMoving.From, Figure.None);
             next.SetFigureAt(figureMoving.To, figureMoving.Figure);
+            
+            Eat(next, figureMoving.To);
+
             if (MoveColor == Color.White)
                 next.MoveNumber++;
+            
             next.MoveColor = MoveColor.FlipColor();
             next.GenerateFen();
             return next;
+        }
+
+        private void Eat(Board next, Square to)
+        {
+            Eat(next, to, 1, 0);
+            Eat(next, to, -1, 0);
+            Eat(next, to, 0, 1);
+            Eat(next, to, 0, -1);
+        }
+
+        private void Eat(Board next, Square to, int xOffset, int yOffset)
+        {
+            Square neighbour = new Square(to.x + xOffset, to.y + yOffset);
+            Console.WriteLine($"{neighbour.x} {neighbour.y} - {neighbour.OnBoard()}");
+            if (neighbour.OnBoard() && GetFigureAt(neighbour).GetColor() != MoveColor)
+            {
+                Square nextNeighbour = new Square(neighbour.x + xOffset, neighbour.y + yOffset);
+                if (nextNeighbour.OnBoard() && GetFigureAt(nextNeighbour).GetColor() == MoveColor)
+                {
+                    next.SetFigureAt(neighbour, Figure.None);
+                }
+            }
         }
         
         private void InitFigures(string data)
