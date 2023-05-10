@@ -6,7 +6,7 @@ namespace Hnefatafl
     {
         public const int Size = 11;
         private const string StartFen ="...aaaaa.../" +
-                                       ".....a....d/" +
+                                       ".....a...../" +
                                        ".........../" +
                                        "a....d....a/" +
                                        "a...ddd...a/" +
@@ -18,7 +18,7 @@ namespace Hnefatafl
                                        "...aaaaa... " +
                                        "b 1";
         public string Fen { get; private set; }
-        public Board Board { get; private set;}
+        public Board Board { get; private set; }
         
         private readonly Move _move;
 

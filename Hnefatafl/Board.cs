@@ -71,10 +71,8 @@ namespace Hnefatafl
         public Color CheckWonColor()
         {
             var kingSquare = GetKingSquare();
-            bool isKingSurrounded = GetFigureAt(new Square(kingSquare.x + 1, kingSquare.y)).GetColor() == Color.Black &&
-                                    GetFigureAt(new Square(kingSquare.x - 1, kingSquare.y)).GetColor() == Color.Black &&
-                                    GetFigureAt(new Square(kingSquare.x, kingSquare.y + 1)).GetColor() == Color.Black &&
-                                    GetFigureAt(new Square(kingSquare.x, kingSquare.y - 1)).GetColor() == Color.Black;
+            bool isKingSurrounded = CheckKingSide(kingSquare.x + 1, kingSquare.y) && CheckKingSide(kingSquare.x - 1, kingSquare.y) &&
+                                    CheckKingSide(kingSquare.x, kingSquare.y + 1) && CheckKingSide(kingSquare.x, kingSquare.y - 1);
             bool isKingOnCorner = kingSquare.IsСorner();
             if (isKingSurrounded)
             {
@@ -87,6 +85,12 @@ namespace Hnefatafl
             }
 
             return Color.None;
+        }
+
+        private bool CheckKingSide(int x, int y)
+        {
+            var side = new Square(x, y);
+            return GetFigureAt(side).GetColor() == Color.Black || side.IsThrone();
         }
 
         private void Eat(Board next, Square to)
