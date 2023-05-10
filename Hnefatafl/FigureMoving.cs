@@ -24,13 +24,12 @@ namespace Hnefatafl
             To = to;
         }
 
-        public FigureMoving(string move) //D e2 e4
+        public FigureMoving(string move, Board board) //e2 e4
         {
-            string[] text = move.Split(" ");
-            Figure = (Figure)text[0][0];
-            From = new Square(text[1]);
-            To = new Square(text[2]);
-            
+            var text = move.Split(" ");
+            From = new Square(text[0]);
+            To = new Square(text[1]);
+            Figure = board.GetFigureAt(From);
         }
     }
 }

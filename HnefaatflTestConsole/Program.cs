@@ -7,13 +7,15 @@ namespace HnefaatflTestConsole
     {
         static void Main(string[] args)
         {
-            Game hnefatafl = new Game();
+            var hnefatafl = new Game();
 
             while (true)
             {
+                if(hnefatafl == null)
+                    break;
                 Console.WriteLine(hnefatafl.Fen);
                 Console.WriteLine(GameToAscii(hnefatafl));
-                string move = Console.ReadLine();
+                var move = Console.ReadLine();
                 if(move=="") break;
                 hnefatafl = hnefatafl.Move(move);
             }
@@ -21,13 +23,13 @@ namespace HnefaatflTestConsole
 
         static string GameToAscii(Game game)
         {
-            string text = "  +-----------------------+\n";
-            for (int y = Game.size - 1; y >= 0; y--)
+            var text = "  +-----------------------+\n";
+            for (var y = Game.Size - 1; y >= 0; y--)
             {
                 text += y + 1;
                 if (y + 1 < 10) text += ' ';
                 text += "|";
-                for (int x = 0; x < Game.size; x++)
+                for (var x = 0; x < Game.Size; x++)
                 {
                     text += game.GetFigureAt(x, y) + " ";
                 }

@@ -1,12 +1,9 @@
-using System;
-using System.Diagnostics;
-
 namespace Hnefatafl
 {
     public class Move
     {
         private FigureMoving _figureMoving;
-        private Board _board;
+        private readonly Board _board;
 
         public Move(Board board)
         {
@@ -55,7 +52,7 @@ namespace Hnefatafl
 
         private bool CanStraightMove()
         {
-            Square at = _figureMoving.From;
+            var at = _figureMoving.From;
 
             do
             {
