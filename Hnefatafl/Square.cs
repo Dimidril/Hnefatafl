@@ -9,6 +9,8 @@ namespace Hnefatafl
         public int x { get; private set; }
         public int y { get; private set; }
 
+        
+        
         public Square(int x, int y)
         {
             this.x = x;
@@ -30,8 +32,29 @@ namespace Hnefatafl
         
         public bool OnBoard()
         {
-            return x >= 0 && x < 11 &&
-                   y >= 0 && y < 11;
+            return x >= 0 && x <= Game.size &&
+                   y >= 0 && y <= Game.size;
+        }
+
+        public bool IsThrone()
+        {
+            return x == Game.size / 2 && y == Game.size / 2;
+        }
+
+        public bool IsСorner()
+        {
+            return (x == 0 && y == 0) || (x == 0 && y == Game.size - 1) ||
+                   (x == Game.size - 1 && y == 0) || (x == Game.size - 1 && y == Game.size - 1);
+        }
+        
+        public static bool operator ==(Square a, Square b)
+        {
+            return a.x == b.x && a.y == b.y;
+        }
+
+        public static bool operator !=(Square a, Square b)
+        {
+            return !(a == b);
         }
     }
 }

@@ -1,3 +1,5 @@
+using System;
+
 namespace Hnefatafl
 {
     public class FigureMoving
@@ -5,6 +7,15 @@ namespace Hnefatafl
         public Figure Figure { get; private set; }
         public Square From { get; private set; }
         public Square To { get; private set; }
+
+        public int DeltaX => To.x - From.x;
+        public int DeltaY => To.y - From.y;
+        
+        public int AbsDeltaX => Math.Abs(DeltaX);
+        public int AbsDeltaY => Math.Abs(DeltaY);
+        
+        public int SignX => Math.Sign(DeltaX);
+        public int SignY => Math.Sign(DeltaY);
 
         public FigureMoving(FigureOnSquare figureOnSquare, Square to)
         {

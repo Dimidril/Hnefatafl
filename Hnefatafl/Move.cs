@@ -30,14 +30,48 @@ namespace Hnefatafl
         
         private bool CanMoveTo()
         {
-            Console.WriteLine(_board.GetFigureAt(_figureMoving.To).ToString());
-            return _figureMoving.To.OnBoard() &&
+            return _figureMoving.To.OnBoard() && 
                    _board.GetFigureAt(_figureMoving.To) == Figure.None;
         }
         
         private bool CanFigureMove()
         {
-            return true;
+            switch (_figureMoving.Figure)
+            {
+                case Figure.Attacker:
+                case Figure.Defender:
+                    return CanStandardMove();
+                case Figure.King:
+                    return CanKingMove();
+                default:
+                    return false;
+            }
+        }
+
+        
+        private bool CanKingMove()
+        {
+            return !(_figureMoving.To.IsThrone() || _figureMoving.To.IsСorner()) && CanStandardMove();
+        }
+        
+        private bool CanStandardMove()
+        {
+            return (_figureMoving.SignX == 0 || _figureMoving.SignY == 0) && CanStraightMove();
+        }
+
+        
+        private bool CanStraightMove()
+        {
+            Square at = _figureMoving.From;
+
+            do
+            {
+                at = new Square(at.x + _figureMoving.SignX, at.y + _figureMoving.SignY);
+                if (at == _figureMoving.To)
+                    return true;
+            } while (at.OnBoard()&&
+                     _board.GetFigureAt(at) == Figure.None);
+            return false;
         }
     }
 }
